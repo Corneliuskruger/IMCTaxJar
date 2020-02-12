@@ -18,7 +18,8 @@ namespace IMCTaxJar
 
             while (true)
             {
-                var order = new Order(new TaxJarService());
+                var order = new Models.Order();
+                var service = new TaxService(new TaxJarCalculator());
 
                 Console.WriteLine("Enter To Zip");
                 order.ToZip = Console.ReadLine();
@@ -63,10 +64,13 @@ namespace IMCTaxJar
                 }
 
                 Console.WriteLine("--------");
-                Console.WriteLine($"Subtotal: {order.GetSubTotal()}");
-                Console.WriteLine($"Tax Percentage: {await order.GetTaxPercentage()}");
-                Console.WriteLine($"Tax Amount: {await order.GetTaxAmount()}");
-                Console.WriteLine($"Order Total: {await order.GetTotal()}");
+                var subTotal = order.GetSubTotal();
+                var taxAmount = await service.GetTaxAmount(order);
+
+                Console.WriteLine($"Subtotal: {subTotal}");
+                Console.WriteLine($"Tax Percentage: {await service.GetTaxPercentage(order.ToZip)}");
+                Console.WriteLine($"Tax Amount: {taxAmount}");
+                Console.WriteLine($"Order Total: {subTotal + taxAmount}");
                 Console.WriteLine("--------");
                 Console.WriteLine();
                 Console.WriteLine();

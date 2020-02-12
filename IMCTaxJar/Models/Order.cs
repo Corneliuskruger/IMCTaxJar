@@ -1,16 +1,12 @@
-﻿using IMCTaxJar.Interfaces;
-using System;
+﻿using IMCTaxJar.Services;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace IMCTaxJar.Models
 {
     public class Order
     {
-        public ITaxService TaxService;
-
         public IList<Product> Products { get; set; } = new List<Product>();
 
         public string Country { get; set; } = "US";
@@ -22,11 +18,6 @@ namespace IMCTaxJar.Models
         public string ToZip { get; set; }
 
 
-        public Order(ITaxService taxService)
-        {
-            TaxService = taxService;
-        }
-
         public void AddProduct(Product product)
         {
             if (product != null)
@@ -36,51 +27,10 @@ namespace IMCTaxJar.Models
             }
         }
 
-
-        public async Task<decimal> GetTaxPercentage()
-        {
-            if (TaxPercentage == null)
-            {
-                if (TaxService != null)
-                {
-                    var result = await TaxService.GetRateForLocation(this);
-                    TaxPercentage = result;
-                }
-            }
-
-            if (TaxPercentage.HasValue)
-                return TaxPercentage.Value;
-            else
-                return 0;
-        }
-
-        public async Task<decimal> GetTaxAmount()
-        {
-            if (TaxAmount == null)
-            {
-                if (TaxService != null)
-                {
-                    var result = await TaxService.CalculateTaxesForOrder(this);
-                    TaxAmount = result;
-                }
-            }
-            
-            return TaxAmount.Value;
-
-        }
-
-        public async Task<decimal> GetTotal()
-        {
-            var result = GetSubTotal();
-            result += await GetTaxAmount();
-            return result;
-        }
-
         public  decimal GetSubTotal()
         {
             var result = Products.Sum(p => p.Price);
             return result;
         }
-        
     }
 }

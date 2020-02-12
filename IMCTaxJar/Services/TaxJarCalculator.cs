@@ -1,21 +1,14 @@
 ﻿using IMCTaxJar.Interfaces;
-using IMCTaxJar.Models;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
 using Taxjar;
 
 namespace IMCTaxJar.Services
 {
-    public class TaxJarService : ITaxService
+    public class TaxJarCalculator : ITaxCalculator
     {
         public TaxjarApi client;
 
-        public TaxJarService()
+        public TaxJarCalculator()
         {
             var apiKey = ConfigurationService.AppSetting["TaxJarApiKey"];
             client = new TaxjarApi(apiKey);
@@ -40,14 +33,13 @@ namespace IMCTaxJar.Services
             {
                 return result.AmountToCollect;
             }
-
-            return 0;
+            return 0m;
         }
 
 
-        public async Task<decimal> GetRateForLocation(Models.Order order)
+        public async Task<decimal> GetRateForLocation(string toZip)
         {
-            var result = await client.RatesForLocationAsync(order.ToZip);
+            var result = await client.RatesForLocationAsync(toZip);
 
 
             if (result != null)

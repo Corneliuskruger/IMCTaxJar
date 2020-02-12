@@ -1,14 +1,11 @@
 ﻿using IMCTaxJar.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace IMCTaxJar.Interfaces
 {
-    public interface ITaxService
+    public interface ITaxCalculator
     {
-        public Task<decimal> GetRateForLocation(Order order);
+        public Task<decimal> GetRateForLocation(string toZip);
 
         public Task<decimal> CalculateTaxesForOrder(Order order);
 

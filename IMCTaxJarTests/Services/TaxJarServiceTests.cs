@@ -1,8 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using IMCTaxJar.Services;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using IMCTaxJar.Models;
 using System.Threading.Tasks;
 
@@ -14,7 +10,7 @@ namespace IMCTaxJar.Services.Tests
         [TestMethod()]
         public void TaxJarServiceTest()
         {
-            var taxJarService = new TaxJarService();
+            var taxJarService = new TaxJarCalculator();
             Assert.IsTrue(taxJarService.client != null, "TaxJar Client is not created");
             Assert.IsTrue(!string.IsNullOrEmpty(taxJarService.client.apiToken), "TaxJar ApiKey is invalid");
         }
@@ -22,9 +18,9 @@ namespace IMCTaxJar.Services.Tests
         [TestMethod()]
         public async Task CalculateTaxesForOrderTest()
         {
-            var taxJarService = new TaxJarService();
+            var taxJarService = new TaxJarCalculator();
 
-            var order = new Order(taxJarService)
+            var order = new Models.Order()
             {
                 FromState = "FL",
                 Country = "US",
@@ -43,9 +39,9 @@ namespace IMCTaxJar.Services.Tests
         [TestMethod()]
         public async Task CalculateTaxesForZeroValueOrderTest()
         {
-            var taxJarService = new TaxJarService();
+            var taxJarService = new TaxJarCalculator();
 
-            var order = new Order(taxJarService)
+            var order = new Models.Order()
             {
                 FromState = "FL",
                 Country = "US",
@@ -62,14 +58,10 @@ namespace IMCTaxJar.Services.Tests
         [TestMethod()]
         public async Task GetTaxRateForLocationTest()
         {
-            var taxJarService = new TaxJarService();
+            var taxJarService = new TaxJarCalculator();
+            var toZip = "33458";
 
-            var order = new Order(taxJarService)
-            {
-                ToZip = "33458"
-            };
-
-            var result = await taxJarService.GetRateForLocation(order);
+            var result = await taxJarService.GetRateForLocation(toZip);
 
             Assert.IsTrue(result != default, "Tax Rate should not be zero");
             Assert.IsTrue(result == 0.065m, "Jupiter Tax Rate should be 0.065");
