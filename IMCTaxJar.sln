@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29728.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IMCTaxJar", "IMCTaxJar\IMCTaxJar.csproj", "{43033366-9864-4189-B15D-51AB393F641A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IMCTaxJarTests", "IMCTaxJarTests\IMCTaxJarTests.csproj", "{250F5DDA-E64B-4885-9E9B-AA76B4755C8B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{43033366-9864-4189-B15D-51AB393F641A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43033366-9864-4189-B15D-51AB393F641A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43033366-9864-4189-B15D-51AB393F641A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43033366-9864-4189-B15D-51AB393F641A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{250F5DDA-E64B-4885-9E9B-AA76B4755C8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{250F5DDA-E64B-4885-9E9B-AA76B4755C8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{250F5DDA-E64B-4885-9E9B-AA76B4755C8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{250F5DDA-E64B-4885-9E9B-AA76B4755C8B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9F733296-3570-4308-B01B-ECE12828F0CF}
+	EndGlobalSection
+EndGlobal
